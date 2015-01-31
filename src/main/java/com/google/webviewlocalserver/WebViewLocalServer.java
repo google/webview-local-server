@@ -218,8 +218,9 @@ public class WebViewLocalServer {
         synchronized (uriMatcher) {
             handler = (PathHandler) uriMatcher.match(request.getUrl());
         }
-        if (handler == null)
+        if (handler == null) {
             return null;
+        }
 
         return new WebResourceResponse(handler.getMimeType(), handler.getEncoding(),
                 handler.getStatusCode(), handler.getReasonPhrase(), handler.getResponseHeaders(),
@@ -468,8 +469,9 @@ public class WebViewLocalServer {
         }
 
         private InputStream getInputStream() {
-            if (is == null)
+            if (is == null) {
                 is = handle();
+            }
             return is;
         }
 
@@ -478,46 +480,31 @@ public class WebViewLocalServer {
         @Override
         public int available() throws IOException {
             InputStream is = getInputStream();
-            if (is == null)
-                return 0;
-            else
-                return is.available();
+            return (is != null) ? is.available() : 0;
         }
 
         @Override
         public int read() throws IOException {
             InputStream is = getInputStream();
-            if (is == null)
-                return -1;
-            else
-                return is.read();
+            return (is != null) ? is.read() : -1;
         }
 
         @Override
         public int read(byte b[]) throws IOException {
             InputStream is = getInputStream();
-            if (is == null)
-                return -1;
-            else
-                return is.read(b);
+            return (is != null) ? is.read(b) : -1;
         }
 
         @Override
         public int read(byte b[], int off, int len) throws IOException {
             InputStream is = getInputStream();
-            if (is == null)
-                return -1;
-            else
-                return is.read(b, off, len);
+            return (is != null) ? is.read(b, off, len) : -1;
         }
 
         @Override
         public long skip(long n) throws IOException {
             InputStream is = getInputStream();
-            if (is == null)
-                return 0;
-            else
-                return is.skip(n);
+            return (is != null) ? is.skip(n) : 0;
         }
     }
 

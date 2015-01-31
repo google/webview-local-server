@@ -115,8 +115,9 @@ public class WebViewLocalServerTest extends InstrumentationTestCase {
         WebViewLocalServer assetServer = new WebViewLocalServer(new MockProtocolHandler() {
             @Override
             public InputStream openAsset(String path) throws IOException {
-                if (path.equals("/www/test.html"))
+                if (path.equals("/www/test.html")) {
                     return new ByteArrayInputStream(testHtmlContents.getBytes("utf-8"));
+                }
                 return null;
             }
         });
@@ -140,8 +141,9 @@ public class WebViewLocalServerTest extends InstrumentationTestCase {
             public InputStream openResource(Uri uri) {
                 Log.i(TAG, "host res: " + uri);
                 try {
-                    if (uri.getPath().equals("/res/raw/test.html"))
+                    if (uri.getPath().equals("/res/raw/test.html")) {
                         return new ByteArrayInputStream(testHtmlContents.getBytes("utf-8"));
+                    }
                 } catch (IOException e) {
                     Log.e(TAG, "exception when creating response", e);
                 }

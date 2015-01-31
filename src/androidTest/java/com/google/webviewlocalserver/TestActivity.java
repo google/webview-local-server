@@ -39,13 +39,11 @@ public class TestActivity extends Activity {
         @SuppressWarnings({"deprecated"})
         @Override
         public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
-            assetServer.shouldInterceptRequest(url);
-            return null;
+            return assetServer.shouldInterceptRequest(url);
         }
 
         @Override
         public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
-            android.util.Log.i("test", "intercepting: " + request.getUrl());
             return assetServer.shouldInterceptRequest(request);
         }
     }
@@ -67,10 +65,8 @@ public class TestActivity extends Activity {
         return onPageFinishedUrl;
     }
 
-    private void setUpWebView(WebView v) {
-        v.getSettings().setJavaScriptEnabled(true);
-        v.getSettings().setUseWideViewPort(true);
-        v.setWebViewClient(new MyWebViewClient());
+    private void setUpWebView(WebView view) {
+        view.setWebViewClient(new MyWebViewClient());
     }
 
     @Override

@@ -25,7 +25,6 @@ android {
     buildToolsVersion "19.1.0"
 
     defaultConfig {
-        applicationId "com.google.webviewlocalserver"
         minSdkVersion 18
         targetSdkVersion 21
         versionCode 1
